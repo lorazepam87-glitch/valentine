@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+}
+
+h1 {
+    font-size: 28px;
+    color: #fff;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background-color: #28a745;
+    color: white;
+}
+
+#noBtn {
+    background-color: #dc3545;
+    color: white;
+    position: absolute;
+}
+
+.flying {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-600px) scale(1.5);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Would you be my Valentine?</h1>
+    <br>
+    <button id="yesBtn">Yes!</button>
+    <button id="noBtn">No</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const container = document.querySelector(".container");
+
+noBtn.addEventListener("click", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+yesBtn.addEventListener("click", () => {
+
+    // Hide buttons
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+
+    // Create flying hearts and flowers
+    const emojis = ["❤️","💖","🌹","🌸","💐","💕"];
+
+    for (let i = 0; i < 40; i++) {
+        const span = document.createElement("span");
+        span.classList.add("flying");
+        span.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * window.innerWidth + "px";
+        span.style.top = window.innerHeight + "px";
+        span.style.fontSize = (20 + Math.random() * 30) + "px";
+        document.body.appendChild(span);
+
+        setTimeout(() => {
+            span.remove();
+        }, 2000);
+    }
+});
+</script>
+
+</body>
+</html>
